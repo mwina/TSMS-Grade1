@@ -23,5 +23,13 @@ void checkFileProi()
     return;          
 }
 
+sqlite3* connectDB()
+{
+    sqlite3 *teacherdb;
+    sqlite3_open("data.db",&teacherdb);
+    char *sql="select count(*) from sqlite_master where type='table' and name = 'teacherdata';";
+    
+}
+
 
 

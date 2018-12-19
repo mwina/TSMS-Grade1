@@ -7,7 +7,7 @@ struct teacher
 {
     int TeacherID;
     char Name[10];
-    bool Gender;
+    int Gender;
     char OfficeAddr[100];
     char HomeAddr[100];
     int PhoneNumber;

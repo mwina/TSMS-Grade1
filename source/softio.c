@@ -25,16 +25,23 @@ void outputTeacher(const teacher *t)
 
 void inputTeacher(teacher *t)
 {
+    char gen[3];
     printf("教师详情输入页\n\n");
     printf("-----基本信息-----\n");
     printf("教师编号：");
     scanf("%d",&t->TeacherID);
     printf("教师姓名：");
-    scanf("%s",&t->Name);
+    scanf("%s",t->Name);
+    printf("教师性别：");
+    scanf("%s",gen);
+    if(gen == "男")
+        t->Gender = 0;
+    else
+        t->Gender = 1;
     printf("单位名称：\n");
-    scanf("%s",&t->OfficeAddr);
+    scanf("%s",t->OfficeAddr);
     printf("家庭住址：\n");
-    scanf("%s",&t->HomeAddr);
+    scanf("%s",t->HomeAddr);
     printf("联系电话：\n");
     scanf("%d",&t->PhoneNumber);
     printf("\n\n-----基本工资与补贴-----\n");
@@ -57,11 +64,12 @@ void inputTeacher(teacher *t)
     scanf("%lf",&t->HealthFee);
     printf("公积金：\n");
     scanf("%lf",&t->PublicFee);
-    printf("输入完毕。\n\n");
+    printf("-----输入完毕-----\n\n");
     
     salaryBeforeFee(t);
     totalFee(t);
     salaryAfterFee(t);
     printf("-----合计-----\n");
     printf("应发工资：%.5lf\n合计扣款：%.5lf\n实发工资：%.5lf\n",t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
+    return;
 }
