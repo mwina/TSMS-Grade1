@@ -2,31 +2,6 @@
 #include "includeheaders.h"
 #include "datastruct.h"
 
-// 检查数据库文件是否可读写
-void checkFileProi()
-{
-    if(!access("data.db",0)) // 是否存在
-    {
-        if(!access("data.db",6)) // 是否可读写
-            printf("数据库文件读取成功。\n");
-        else // 不可读写直接退出。
-            {
-                printf("数据库文件无法读写，请检查是否有程序占用数据文件，并在占用解除后重启本程序。\n");
-                system("pause");
-                exit(0);
-            }
-    }
-    else // 不存在则开始新建
-    {
-        printf("数据库文件丢失，3秒后新建。\n");
-        Sleep(3000); // 等待三秒
-        FILE *tmp=NULL;
-        tmp=fopen("data.db","w");
-        fprintf(tmp,"0");
-        fclose(tmp);
-    }
-    return;          
-}
 
 void readFile()
 {
