@@ -20,7 +20,6 @@ void outputTeacher(const teacher *t)
     printf("-----合计-----\n");
     printf("应发工资：%.5lf\n合计扣款：%.5lf\n实发工资：%.5lf\n",t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
     system("pause");
-    return;
 }
 
 void inputTeacher(teacher *t)
@@ -71,5 +70,4 @@ void inputTeacher(teacher *t)
     salaryAfterFee(t);
     printf("-----合计-----\n");
     printf("应发工资：%.5lf\n合计扣款：%.5lf\n实发工资：%.5lf\n",t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
-    return;
 }

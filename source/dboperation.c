@@ -20,7 +20,6 @@ void checkFileProi()
         sqlite3_open("data.db",&teacherdb);
         sqlite3_close(teacherdb);
     }
-    return;          
 }
 
 sqlite3* connectDB()

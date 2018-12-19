@@ -3,7 +3,7 @@
 
 
 // 定义 teacher 结构体
-struct teacher
+typedef struct Teacher
 {
     int TeacherID;
     char Name[10];
@@ -23,10 +23,6 @@ struct teacher
     double SalaryBeforeFee;
     double TotalFee;
     double SalaryAfterFee;
-};
-
-// 设置别名，便于定义
-typedef struct teacher Teacher;
-
+} teacher;
 
 #endif

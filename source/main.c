@@ -13,7 +13,7 @@ int main()
     checkFileProi(); // 先检查数据文件状态
     readFile();
     showWelcome();
-    while(true)
+    while(1)
     {
         mainMenu();
         int opt=0;
@@ -47,5 +47,4 @@ void reDirect(int opt) // 依据操作码重定向函数
             printf("无法识别的操作符，请重新输入。");
             break; // break后回到主菜单
     }
-    return;
 }

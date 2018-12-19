@@ -7,8 +7,7 @@ void showWelcome() // 运行前先显示欢迎信息
     printf("               欢迎使用教师工资管理系统。\n\n");  // 欢迎语，3秒后消失。
     printf("该系统由18270112班 傅则凡 周韦彤 曹彦洋 同学制作。\n\n");
     printf("                                              最后更新：2018/01/27");
-    Sleep(3000); // 等待三秒
-    return;
+    Sleep(3000);
 }
 
 void mainMenu() // 主菜单函数
@@ -23,7 +22,6 @@ void mainMenu() // 主菜单函数
     printf("0. 【退出】");
 
     printf("请输入操作代码：");
-    return;
 }
 
 void search() //查找教师信息
@@ -52,7 +50,6 @@ void search() //查找教师信息
             break;
         default:
             printf("请重新输入\n");
-    } 
-    return;
+    }
 }
 
