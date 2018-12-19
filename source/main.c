@@ -11,7 +11,7 @@ void reDirect(int opt);
 int main()
 {
     checkFileProi(); // 先检查数据文件状态
-    readFile();
+    connectDB();
     showWelcome();
     while(1)
     {
