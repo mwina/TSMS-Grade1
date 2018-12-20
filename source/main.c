@@ -94,7 +94,7 @@ void search() //查找教师信息
             break;
         case(3):
             printf("联系电话：\n");
-            scanf("%d",&phone);
+            scanf("%d",&userPhoneNumber);
 
             break;
         default:

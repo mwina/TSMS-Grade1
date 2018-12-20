@@ -1,4 +1,5 @@
 #include "includeheaders.h"
+#include "softio.h"
 
 void checkFileProi();
 sqlite3* connectDB();
@@ -97,6 +98,26 @@ void addTeacherToDB(sqlite3 *teacherdb,const teacher *t)
 void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id)
 {
     char sql[300]="",*err;
-
+    int retc=sqlite3_exec(teacherdb,"SELECT * FROM teacherdb WHERE TeacherID==id",outputTeacher,NULL,&err);
+    if(retc != SQLITE_OK)
+        printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+    system("pause");
 }
 
+void findTeacherinDB_TeacherName(sqlite3 *teacherdb,char name)
+{
+    char sql[300]="",*err;
+    int retc=sqlite3_exec(teacherdb,"SELECT * FROM teacherdb WHERE Name=",outputTeacher,NULL,&err);
+    if(retc != SQLITE_OK)
+        printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+    system("pause");
+}
+
+void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,int phone)
+{
+    char sql[300]="",*err;
+    int retc=sqlite3_exec(teacherdb,"SELECT * FROM teacherdb WHERE PhoneNumber==phone",outputTeacher,NULL,&err);
+    if(retc != SQLITE_OK)
+        printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+    system("pause");
+}
