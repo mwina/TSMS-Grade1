@@ -1,5 +1,4 @@
 #include "includeheaders.h"
-#include "datastruct.h"
 
 // 计算包含了补贴的应发工资总额
 void salaryBeforeFee(teacher *tmp)

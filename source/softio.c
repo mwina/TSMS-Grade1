@@ -1,5 +1,4 @@
 #include "includeheaders.h"
-#include "datastruct.h"
 
 void outputTeacher(const teacher *t)
 {

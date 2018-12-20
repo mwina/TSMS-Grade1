@@ -1,6 +1,5 @@
 // 开始包含基本头文件
 #include "includeheaders.h"
-#include "datastruct.h"
 #include "dboperation.h"
 #include "softio.h"
 
