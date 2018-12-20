@@ -1,4 +1,5 @@
 #include "includeheaders.h"
+#include "datastruct.h"
 #include "sqlite3.h"
 
 void checkFileProi();
@@ -42,8 +43,7 @@ sqlite3* connectDB() // 用于连接数据库
     {
         printf("未找到数据表，新建中...\n");
         char *sqlct="CREATE TABLE teacherdata(" \
-                    "ID             INT PRIMARY KEY NOT NULL," \
-                    "TeacherID      INT             NOT NULL," \
+                    "TeacherID      INT PRIMARY KEY NOT NULL," \
                     "Name           TEXT            NOT NULL," \
                     "Gender         INT             NOT NULL," \
                     "OfficeAddr     TEXT            NOT NULL," \
@@ -80,5 +80,19 @@ int isTableExistCallback(void *ret,int nCount,char **cValue,char **cName)
     else
         *retint = 1;
     return SQLITE_OK;
+}
+
+void addTeacherToDB(sqlite3 *teacherdb,const teacher *t)
+{
+    char sql[500]="",*err;
+    sprintf(sql,"INSERT INTO teacherdata VALUES (%d,\'%s\',%d,\'%s\',\'%s\',%d,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf);"
+            ,t->TeacherID,t->Name,t->Gender,t->OfficeAddr,t->HomeAddr,t->PhoneNumber,t->BasicSalary,t->Adds,t->AddsLife,t->TelephoneFee,t->WaterElectricityFee
+            ,t->HouseFee,t->GainTax,t->HealthFee,t->PublicFee,t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
+    int retc=sqlite3_exec(teacherdb,sql,NULL,NULL,&err);
+    if(retc != SQLITE_OK)
+        printf("添加教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+    else
+        printf("添加教师数据成功。\n");
+    system("pause");
 }
 

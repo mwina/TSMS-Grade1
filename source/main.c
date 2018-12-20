@@ -5,14 +5,18 @@
 #include "softio.h"
 #include "menu.h"
 
+// 函数声明
 void reDirect(int opt);
+
+// 全局变量定义
+sqlite3 *dbaccess;
 
 // 程序入口点
 int main()
 {
     checkFileProi(); // 先检查数据文件状态
-    connectDB();
-    showWelcome();
+    dbaccess=connectDB(); // 连接数据库，并传递数据库连接指针
+    showWelcome(); // 显示欢迎消息
     while(1)
     {
         mainMenu();
@@ -25,6 +29,7 @@ int main()
 
 void reDirect(int opt) // 依据操作码重定向函数
 {
+    teacher tmp;
     switch(opt) // switch-case分支以进行条件判断
     {
         case 0: // 用户选择退出
@@ -32,10 +37,8 @@ void reDirect(int opt) // 依据操作码重定向函数
             Sleep(5000); // 等待5秒
             exit(0); // 强制退出程序
         case 1:
-            teacher t;
-            inputTeacher(&t);
-            addTeachertoFile(&t);
-            system("pause");
+            inputTeacher(&tmp);
+            addTeacherToDB(dbaccess,&tmp);
             break;
         case 2:
 
