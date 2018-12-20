@@ -96,3 +96,9 @@ void addTeacherToDB(sqlite3 *teacherdb,const teacher *t)
     system("pause");
 }
 
+void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id)
+{
+    char sql[300]="",*err;
+
+}
+

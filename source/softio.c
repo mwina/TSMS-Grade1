@@ -1,6 +1,5 @@
 #include "includeheaders.h"
 #include "datastruct.h"
-#include "salarycalculate.h"
 
 void outputTeacher(const teacher *t)
 {

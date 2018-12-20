@@ -25,4 +25,8 @@ typedef struct Teacher
     double SalaryAfterFee;
 } teacher;
 
+void salaryAfterFee(teacher *tmp);
+void salaryBeforeFee(teacher *tmp);
+void totalFee(teacher *tmp);
+
 #endif
