@@ -149,6 +149,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles\testdb.dir\build.make CMakeFiles/testdb.dir/main.c.s
 .PHONY : main.c.s
 
+sqlite3.obj: sqlite3.c.obj
+
+.PHONY : sqlite3.obj
+
+# target to build an object file
+sqlite3.c.obj:
+	$(MAKE) -f CMakeFiles\testdb.dir\build.make CMakeFiles/testdb.dir/sqlite3.c.obj
+.PHONY : sqlite3.c.obj
+
+sqlite3.i: sqlite3.c.i
+
+.PHONY : sqlite3.i
+
+# target to preprocess a source file
+sqlite3.c.i:
+	$(MAKE) -f CMakeFiles\testdb.dir\build.make CMakeFiles/testdb.dir/sqlite3.c.i
+.PHONY : sqlite3.c.i
+
+sqlite3.s: sqlite3.c.s
+
+.PHONY : sqlite3.s
+
+# target to generate assembly for a file
+sqlite3.c.s:
+	$(MAKE) -f CMakeFiles\testdb.dir\build.make CMakeFiles/testdb.dir/sqlite3.c.s
+.PHONY : sqlite3.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -161,6 +188,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... sqlite3.obj
+	@echo ... sqlite3.i
+	@echo ... sqlite3.s
 .PHONY : help
 
 

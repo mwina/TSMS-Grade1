@@ -3,4 +3,8 @@ project(testdb C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(testdb main.c)
+add_executable(testdb
+        main.c
+        sqlite3.c
+        sqlite3.h
+        )

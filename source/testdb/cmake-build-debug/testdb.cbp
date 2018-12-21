@@ -77,6 +77,12 @@
 		<Unit filename="D:/TSMS-Grade1/source/testdb/main.c">
 			<Option target="testdb"/>
 		</Unit>
+		<Unit filename="D:/TSMS-Grade1/source/testdb/sqlite3.c">
+			<Option target="testdb"/>
+		</Unit>
+		<Unit filename="D:/TSMS-Grade1/source/testdb/sqlite3.h">
+			<Option target="testdb"/>
+		</Unit>
 		<Unit filename="D:/TSMS-Grade1/source/testdb/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

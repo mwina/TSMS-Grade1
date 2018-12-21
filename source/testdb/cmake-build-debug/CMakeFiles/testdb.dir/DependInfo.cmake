@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "D:/TSMS-Grade1/source/testdb/main.c" "D:/TSMS-Grade1/source/testdb/cmake-build-debug/CMakeFiles/testdb.dir/main.c.obj"
+  "D:/TSMS-Grade1/source/testdb/sqlite3.c" "D:/TSMS-Grade1/source/testdb/cmake-build-debug/CMakeFiles/testdb.dir/sqlite3.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

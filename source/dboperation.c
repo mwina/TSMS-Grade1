@@ -78,7 +78,7 @@ sqlite3* connectDB() // 用于连接数据库
 int isTableExistCallback(void *ret,int nCount,char **cValue,char **cName)
 {
     int *retint = (int *)ret;
-    if(nCount==0)
+    if(atoi(cValue[0])==0)
         *retint = 0;
     else
         *retint = 1;
