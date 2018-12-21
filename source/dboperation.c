@@ -140,7 +140,7 @@ void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,int phone)
 
 int findTeacherCallback(void *ret,int nCount,char **cValue,char **cName)
 {
-    if()
+
     teacher *retdata=(teacher*)ret;
 
     retdata->TeacherID=atoi(cValue[0]);
