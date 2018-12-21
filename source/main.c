@@ -7,6 +7,7 @@
 void reDirect(int opt);
 void showWelcome();
 void mainMenu();
+void search();
 
 // 全局变量定义
 extern sqlite3 *dbaccess;
@@ -85,7 +86,7 @@ void search() //查找教师信息
         case(1):
             printf("教师编号：\n");
             scanf("%d",&teacherID);
-
+            findTeacherinDB_TeacherID(dbaccess,teacherID);
             break;
         case(2):
             printf("教师姓名：\n");

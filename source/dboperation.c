@@ -98,7 +98,8 @@ void addTeacherToDB(sqlite3 *teacherdb,const teacher *t)
 void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id)
 {
     char sql[300]="",*err;
-    int retc=sqlite3_exec(teacherdb,"SELECT * FROM teacherdb WHERE TeacherID==id",outputTeacher,NULL,&err);
+    sprintf(sql,"SELECT * FROM teacherdb WHERE TeacherID = %d",id);
+    int retc=sqlite3_exec(teacherdb,sql,outputTeacher,NULL,&err);
     if(retc != SQLITE_OK)
         printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
     system("pause");
