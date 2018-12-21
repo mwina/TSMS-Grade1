@@ -9,7 +9,7 @@ void outputTeacher(const teacher *t)
         printf("教师性别：女\n");
     else
         printf("教师性别：男\n");
-    printf("单位名称：%s\n家庭住址：%s\n联系电话：%d\n\n",t->OfficeAddr,t->HomeAddr,t->PhoneNumber);
+    printf("单位名称：%s\n家庭住址：%s\n联系电话：%s\n\n",t->OfficeAddr,t->HomeAddr,t->PhoneNumber);
     printf("-----基本工资与补贴-----\n");
     printf("基本工资：%.5lf\n津贴：%.5lf\n生活补贴：%.5lf\n\n",t->BasicSalary,t->Adds,t->AddsLife);
     printf("-----扣款信息-----\n");
@@ -39,7 +39,7 @@ void inputTeacher(teacher *t)
     printf("家庭住址：\n");
     scanf("%s",t->HomeAddr);
     printf("联系电话：\n");
-    scanf("%d",&t->PhoneNumber);
+    scanf("%s",t->PhoneNumber);
     printf("\n\n-----基本工资与补贴-----\n");
     printf("基本工资：\n");
     scanf("%lf",&t->BasicSalary);

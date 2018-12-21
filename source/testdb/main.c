@@ -1,19 +1,85 @@
 #include <stdio.h>
 #include "sqlite3.h"
+#include <stdlib.h>
+#include <string.h>
+#include "utf8_gbk_mem.h"
+
+typedef struct Teacher
+{
+    int TeacherID;
+    char Name[10];
+    int Gender;
+    char OfficeAddr[100];
+    char HomeAddr[100];
+    int PhoneNumber;
+    double BasicSalary;
+    double Adds;
+    double AddsLife;
+    double TelephoneFee;
+    double WaterElectricityFee;
+    double HouseFee;
+    double GainTax;
+    double HealthFee;
+    double PublicFee;
+    double SalaryBeforeFee;
+    double TotalFee;
+    double SalaryAfterFee;
+} teacher;
 
 sqlite3 *dbaccess;
 
-int callback(void *para,int nCount,char **cValue,char **cName)
+void outputTeacher(const teacher *t)
 {
-    printf("nCount=%d\ncValue[0]=%s",nCount,cValue[0]);
+    printf("½ÌÊ¦ÏêÇé\n\n");
+    printf("-----»ù±¾ĞÅÏ¢-----\n");
+    printf("½ÌÊ¦±àºÅ£º%d\n½ÌÊ¦ĞÕÃû£º%s\n",t->TeacherID,t->Name);
+    if(t->Gender)
+        printf("½ÌÊ¦ĞÔ±ğ£ºÅ®\n");
+    else
+        printf("½ÌÊ¦ĞÔ±ğ£ºÄĞ\n");
+    printf("µ¥Î»Ãû³Æ£º%s\n¼ÒÍ¥×¡Ö·£º%s\nÁªÏµµç»°£º%d\n\n",t->OfficeAddr,t->HomeAddr,t->PhoneNumber);
+    printf("-----»ù±¾¹¤×ÊÓë²¹Ìù-----\n");
+    printf("»ù±¾¹¤×Ê£º%.5lf\n½òÌù£º%.5lf\nÉú»î²¹Ìù£º%.5lf\n\n",t->BasicSalary,t->Adds,t->AddsLife);
+    printf("-----¿Û¿îĞÅÏ¢-----\n");
+    printf("µç»°·Ñ£º%.5lf\nË®µç·Ñ£º%.5lf\n·¿×â£º%.5lf\nËùµÃË°£º%.5lf\nÎÀÉú·Ñ£º%.5lf\n¹«»ı½ğ£º%.5lf\n\n"
+            ,t->TelephoneFee,t->WaterElectricityFee,t->HouseFee,t->GainTax,t->HealthFee,t->PublicFee);
+    printf("-----ºÏ¼Æ-----\n");
+    printf("Ó¦·¢¹¤×Ê£º%.5lf\nºÏ¼Æ¿Û¿î£º%.5lf\nÊµ·¢¹¤×Ê£º%.5lf\n",t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
+}
+
+int callback(void *ret,int nCount,char **cValue,char **cName)
+{
+    teacher *retdata=(teacher*)ret;
+
+    retdata->TeacherID=atoi(cValue[0]);
+    utf82gbk_(cValue[1],retdata->Name);
+    retdata->Gender=atoi(cValue[2]);
+    utf82gbk_(cValue[3],retdata->OfficeAddr);
+    utf82gbk_(cValue[4],retdata->HomeAddr);
+    retdata->PhoneNumber=atoi(cValue[5]);
+    retdata->BasicSalary=atof(cValue[6]);
+    retdata->Adds=atof(cValue[7]);
+    retdata->AddsLife=atof(cValue[8]);
+    retdata->TelephoneFee=atof(cValue[9]);
+    retdata->WaterElectricityFee=atof(cValue[10]);
+    retdata->HouseFee=atof(cValue[11]);
+    retdata->GainTax=atof(cValue[12]);
+    retdata->HealthFee=atof(cValue[13]);
+    retdata->PublicFee=atof(cValue[14]);
+    retdata->SalaryBeforeFee=atof(cValue[15]);
+    retdata->TotalFee=atof(cValue[16]);
+    retdata->SalaryAfterFee=atof(cValue[17]);
+
+    outputTeacher(retdata);
     return SQLITE_OK;
 }
 
 int main() {
     sqlite3_open("data.db",&dbaccess);
-    char *sql="select count(*) from sqlite_master where type='table' and name = 'teacherdata';",*err; // å®šä¹‰sqlè¯­å¥å’Œé”™è¯¯æ¶ˆæ¯å˜é‡
-    int retc=sqlite3_exec(dbaccess,sql,callback,NULL,&err); // æŸ¥è¯¢æ•°æ®åº“
-    if(retc != SQLITE_OK) // å¦‚æœæŸ¥è¯¢è¯­å¥æ‰§è¡Œå¤±è´¥
-        printf("è¿æ¥æ•°æ®åº“å¤±è´¥ã€‚é”™è¯¯ç ï¼š%dï¼Œé”™è¯¯ä¿¡æ¯ï¼š%s\n",retc,err); // æŠ›å‡ºé”™è¯¯
+    teacher t;
+    char *sql="SELECT * FROM teacherdata WHERE TeacherID=10000;",*err; // ¶¨ÒåsqlÓï¾äºÍ´íÎóÏûÏ¢±äÁ¿
+    int retc=sqlite3_exec(dbaccess,sql,callback,&t,&err); // ²éÑ¯Êı¾İ¿â
+    if(retc != SQLITE_OK) // Èç¹û²éÑ¯Óï¾äÖ´ĞĞÊ§°Ü
+        printf("Á¬½ÓÊı¾İ¿âÊ§°Ü¡£´íÎóÂë£º%d£¬´íÎóĞÅÏ¢£º%s\n",retc,err); // Å×³ö´íÎó
      return 0;
 }

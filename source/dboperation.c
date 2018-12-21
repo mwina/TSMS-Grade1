@@ -7,7 +7,8 @@ int isTableExistCallback(void *,int nCount,char **cValue,char **cName);
 void addTeacherToDB(sqlite3 *teacherdb,const teacher *t);
 void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id);
 void findTeacherinDB_TeacherName(sqlite3 *teacherdb,const char *name);
-void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,int phone);
+void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,const char *phone);
+int findTeacherCallback(void *ret,int nCount,char **cValue,char **cName);
 
 void checkFileProi() // 用于检查数据库文件状态
 {
@@ -34,7 +35,7 @@ sqlite3* connectDB() // 用于连接数据库
 {
     sqlite3 *teacherdb; // 定义数据库访问指针
     sqlite3_open("data.db",&teacherdb); // 打开数据库文件
-    char *sql="select count(*) from sqlite_master where type='table' and name = 'teacherdata';",*err; // 定义sql语句和错误消息变量
+    char *sql="SELECT COUNT(*) FROM sqlite_master WHERE TYPE='table' AND NAME='teacherdata';",*err; // 定义sql语句和错误消息变量
     int isTableExist=0; // 定义变量，是否存在表
     int retc=sqlite3_exec(teacherdb,sql,isTableExistCallback,&isTableExist,&err); // 查询数据库
     if(retc != SQLITE_OK) // 如果查询语句执行失败
@@ -51,7 +52,7 @@ sqlite3* connectDB() // 用于连接数据库
                     "Gender         INT             NOT NULL," \
                     "OfficeAddr     TEXT            NOT NULL," \
                     "HomeAddr       TEXT            NOT NULL," \
-                    "PhoneNumber    INT             NOT NULL," \
+                    "PhoneNumber    TEXT            NOT NULL," \
                     "BasicSalary    REAL            NOT NULL," \
                     "Adds           REAL            NOT NULL," \
                     "AddsLife       REAL            NOT NULL," \
@@ -88,8 +89,13 @@ int isTableExistCallback(void *ret,int nCount,char **cValue,char **cName)
 void addTeacherToDB(sqlite3 *teacherdb,const teacher *t)
 {
     char sql[500]="",*err;
-    sprintf(sql,"INSERT INTO teacherdata VALUES (%d,\'%s\',%d,\'%s\',\'%s\',%d,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf);"
-            ,t->TeacherID,t->Name,t->Gender,t->OfficeAddr,t->HomeAddr,t->PhoneNumber,t->BasicSalary,t->Adds,t->AddsLife,t->TelephoneFee,t->WaterElectricityFee
+    char Name[20],OfficeAddr[200],HomeAddr[200],PhoneNumber[30];
+    gbk2utf8_(Name,t->Name);
+    gbk2utf8_(OfficeAddr,t->OfficeAddr);
+    gbk2utf8_(HomeAddr,t->HomeAddr);
+    gbk2utf8_(PhoneNumber,t->PhoneNumber);
+    sprintf(sql,"INSERT INTO teacherdata VALUES (%d,\'%s\',%d,\'%s\',\'%s\',\'%s\',%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf);"
+            ,t->TeacherID,Name,t->Gender,OfficeAddr,HomeAddr,PhoneNumber,t->BasicSalary,t->Adds,t->AddsLife,t->TelephoneFee,t->WaterElectricityFee
             ,t->HouseFee,t->GainTax,t->HealthFee,t->PublicFee,t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
     int retc=sqlite3_exec(teacherdb,sql,NULL,NULL,&err);
     if(retc != SQLITE_OK)
@@ -103,7 +109,7 @@ void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id)
 {
     char sql[300]="",*err;
     teacher t;
-    sprintf(sql,"SELECT * FROM teacherdb WHERE TeacherID=%d",id);
+    sprintf(sql,"SELECT * FROM teacherdata WHERE TeacherID=%d",id);
     int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
     if(retc != SQLITE_OK)
         printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
@@ -116,7 +122,7 @@ void findTeacherinDB_TeacherName(sqlite3 *teacherdb,const char *name)
 {
     char sql[300]="",*err;
     teacher t;
-    sprintf(sql,"SELECT * FROM teacherdb WHERE Name=\'%s\'",name);
+    sprintf(sql,"SELECT * FROM teacherdata WHERE Name=\'%s\'",name);
     int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
     if(retc != SQLITE_OK)
         printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
@@ -125,11 +131,11 @@ void findTeacherinDB_TeacherName(sqlite3 *teacherdb,const char *name)
     system("pause");
 }
 
-void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,int phone)
+void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,const char *phone)
 {
     char sql[300]="",*err;
     teacher t;
-    sprintf(sql,"SELECT * FROM teacherdb WHERE PhoneNumber=%d",phone);
+    sprintf(sql,"SELECT * FROM teacherdata WHERE PhoneNumber=%s",phone);
     int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
     if(retc != SQLITE_OK)
         printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
@@ -144,10 +150,10 @@ int findTeacherCallback(void *ret,int nCount,char **cValue,char **cName)
     teacher *retdata=(teacher*)ret;
 
     retdata->TeacherID=atoi(cValue[0]);
-    strcpy(retdata->Name,cValue[1]);
+    utf82gbk_(cValue[1],retdata->Name);
     retdata->Gender=atoi(cValue[2]);
-    strcpy(retdata->OfficeAddr,cValue[3]);
-    strcpy(retdata->HomeAddr,cValue[4]);
+    utf82gbk_(cValue[3],retdata->OfficeAddr);
+    utf82gbk_(cValue[4],retdata->HomeAddr);
     retdata->PhoneNumber=atoi(cValue[5]);
     retdata->BasicSalary=atof(cValue[6]);
     retdata->Adds=atof(cValue[7]);

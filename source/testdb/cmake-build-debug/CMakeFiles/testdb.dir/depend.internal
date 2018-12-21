@@ -4,5 +4,6 @@
 CMakeFiles/testdb.dir/main.c.obj
  D:/TSMS-Grade1/source/testdb/main.c
  D:/TSMS-Grade1/source/testdb/sqlite3.h
+ D:/TSMS-Grade1/source/testdb/utf8_gbk_mem.h
 CMakeFiles/testdb.dir/sqlite3.c.obj
  D:/TSMS-Grade1/source/testdb/sqlite3.c

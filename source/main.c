@@ -114,8 +114,8 @@ void addTeacherMenu()
 
 void searchMenu() //查找教师信息
 {
-    int choice,teacherID,userPhoneNumber;
-    char name[10]="";
+    int choice,teacherID;
+    char name[10]="",userPhoneNumber[20]="";
     int choiceaftersearch; //执行查找后的操作
     while(1)
     {
@@ -135,7 +135,7 @@ void searchMenu() //查找教师信息
                 break;
             case(3): //输入教师联系电话以查询
                 printf("联系电话：");
-                scanf("%d",&userPhoneNumber);
+                scanf("%s",userPhoneNumber);
                 findTeacherinDB_PhoneNumber(dbaccess,userPhoneNumber);
                 break;
             default:
