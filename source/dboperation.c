@@ -1,6 +1,8 @@
+// 包含必要的头文件
 #include "includeheaders.h"
 #include "softio.h"
 
+// 各函数的声明
 void checkFileProi();
 sqlite3* connectDB();
 int isTableExistCallback(void *,int nCount,char **cValue,char **cName);
@@ -43,9 +45,10 @@ sqlite3* connectDB() // 用于连接数据库
         printf("连接数据库失败。错误码：%d，错误信息：%s\n",retc,err); // 抛出错误
         exit(0); //强制退出
     }
-    if(isTableExist== 0)
+    if(isTableExist== 0) // 如果不存在数据表
     {
-        printf("未找到数据表，新建中...\n");
+        printf("未找到数据表，新建中...\n"); // 提醒用户
+        // 使用sql语句在当前文件中新建
         char *sqlct="CREATE TABLE teacherdata(" \
                     "TeacherID      INT PRIMARY KEY NOT NULL," \
                     "Name           TEXT            NOT NULL," \
@@ -65,46 +68,46 @@ sqlite3* connectDB() // 用于连接数据库
                     "SalaryBeforeFee REAL           NOT NULL," \
                     "TotalFee       REAL            NOT NULL," \
                     "SalaryAfterFee REAL            NOT NULL);";
-        int retc2= sqlite3_exec(teacherdb,sqlct,NULL,NULL,&err);
-        if(retc2 != SQLITE_OK)
+        int retc2= sqlite3_exec(teacherdb,sqlct,NULL,NULL,&err); // 调用数据表创建语句
+        if(retc2 != SQLITE_OK) // 如果sql语句执行失败
         {
-            printf("创建表失败。错误码：%d，错误信息：%s\n",retc2,err);
-            exit(0);
+            printf("创建表失败。错误码：%d，错误信息：%s\n",retc2,err); // 提示用户
+            exit(0); // 数据表不存在，无法执行后续操作，强制退出
         }
     }
-    return teacherdb;
+    return teacherdb; // 返回sql连接指针，在后续操作中使用
 
 }
 
-int isTableExistCallback(void *ret,int nCount,char **cValue,char **cName)
+int isTableExistCallback(void *ret,int nCount,char **cValue,char **cName) // 判断数据表是否存在时的回调函数
 {
-    int *retint = (int *)ret;
-    if(atoi(cValue[0])==0)
+    int *retint = (int *)ret; // 指针强制类型转换
+    if(atoi(cValue[0])==0) // 读取sql语句的返回值，执行操作
         *retint = 0;
     else
         *retint = 1;
-    return SQLITE_OK;
+    return SQLITE_OK; // 回调执行成功，返回0
 }
 
-void addTeacherToDB(sqlite3 *teacherdb,const teacher *t)
+void addTeacherToDB(sqlite3 *teacherdb,const teacher *t) // 将教师数据写入数据库
 {
-    char sql[500]="",*err;
+    char sql[500]="",*err; // 定义sql语句和错误指针
     sprintf(sql,"INSERT INTO teacherdata VALUES (%d,\'%s\',%d,\'%s\',\'%s\',\'%s\',%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf,%.5lf);"
             ,t->TeacherID,t->Name,t->Gender,t->OfficeAddr,t->HomeAddr,t->PhoneNumber,t->BasicSalary,t->Adds,t->AddsLife,t->TelephoneFee,t->WaterElectricityFee
-            ,t->HouseFee,t->GainTax,t->HealthFee,t->PublicFee,t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
-    int retc=sqlite3_exec(teacherdb,sql,NULL,NULL,&err);
-    if(retc != SQLITE_OK)
-        printf("添加教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
-    else
-        printf("添加教师数据成功。\n");
-    system("pause");
+            ,t->HouseFee,t->GainTax,t->HealthFee,t->PublicFee,t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee); // 此处构造sql语句并printf到字符串中
+    int retc=sqlite3_exec(teacherdb,sql,NULL,NULL,&err); // 执行sql语句
+    if(retc != SQLITE_OK) // 若sql执行失败
+        printf("添加教师数据失败。错误码：%d，错误信息：%s\n",retc,err); // 提醒用户
+    else // 否则
+        printf("添加教师数据成功。\n"); // 告知用户成功
+    system("pause"); // 暂停
 }
 
-void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id)
+void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id) // 通过教师id到数据库中查询教师
 {
     char sql[300]="",*err;
     teacher t;
-    sprintf(sql,"SELECT * FROM teacherdata WHERE TeacherID=%d",id);
+    sprintf(sql,"SELECT * FROM teacherdata WHERE TeacherID=%d",id); // 构造select语句
     int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
     if(retc != SQLITE_OK)
         printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
@@ -139,7 +142,7 @@ void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,const char *phone)
     system("pause");
 }
 
-int findTeacherCallback(void *ret,int nCount,char **cValue,char **cName)
+int findTeacherCallback(void *ret,int nCount,char **cValue,char **cName) // 查询教师时的回调函数
 {
 
     teacher *retdata=(teacher*)ret;
@@ -149,7 +152,7 @@ int findTeacherCallback(void *ret,int nCount,char **cValue,char **cName)
     retdata->Gender=atoi(cValue[2]);
     strcpy(retdata->OfficeAddr,cValue[3]);
     strcpy(retdata->HomeAddr,cValue[4]);
-    retdata->PhoneNumber=atoi(cValue[5]);
+    strcpy(retdata->PhoneNumber,cValue[5]);
     retdata->BasicSalary=atof(cValue[6]);
     retdata->Adds=atof(cValue[7]);
     retdata->AddsLife=atof(cValue[8]);

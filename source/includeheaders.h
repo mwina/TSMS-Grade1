@@ -8,7 +8,7 @@
 #include <string.h>      // C字符串函数
 #include <io.h>         // C扩展输入输出
 #include <windows.h>    // C窗口
-#include "sqlite3.h"
+#include "sqlite3.h"    // SQLite3的库
 
 // 定义 teacher 结构体
 typedef struct Teacher
@@ -18,7 +18,7 @@ typedef struct Teacher
     int Gender;
     char OfficeAddr[100];
     char HomeAddr[100];
-    char PhoneNumber[20];
+    char PhoneNumber[20]; // 电话号码位数超过int表示范围，利用字符串表示
     double BasicSalary;
     double Adds;
     double AddsLife;
@@ -33,6 +33,7 @@ typedef struct Teacher
     double SalaryAfterFee;
 } teacher;
 
+// 分别是计算实发工资、应发工资和合计扣款的函数定义
 void salaryAfterFee(teacher *tmp);
 void salaryBeforeFee(teacher *tmp);
 void totalFee(teacher *tmp);

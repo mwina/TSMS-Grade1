@@ -1,11 +1,12 @@
+// 包含必要头文件
 #include "includeheaders.h"
 
-void outputTeacher(const teacher *t)
+void outputTeacher(const teacher *t) // 输出教师信息
 {
     printf("教师详情\n\n");
-    printf("-----基本信息-----\n");
+    printf("-----基本信息-----\n"); // 分为四个部分：基本信息，基本工资和补贴，扣款信息和合计
     printf("教师编号：%d\n教师姓名：%s\n",t->TeacherID,t->Name);
-    if(t->Gender)
+    if(t->Gender) // 通过int值判断性别
         printf("教师性别：女\n");
     else
         printf("教师性别：男\n");
@@ -19,9 +20,9 @@ void outputTeacher(const teacher *t)
     printf("应发工资：%.5lf\n合计扣款：%.5lf\n实发工资：%.5lf\n",t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
 }
 
-void inputTeacher(teacher *t)
+void inputTeacher(teacher *t) // 输入教师信息，并通过指针修改传入的t指向的结构体变量
 {
-    char gen[3];
+    char gen[3]; // 输入汉字的性别，默认是GBK编码，利用字符串判等判断是否是男或女
     printf("教师详情输入页\n\n");
     printf("-----基本信息-----\n");
     printf("教师编号：");
@@ -30,7 +31,7 @@ void inputTeacher(teacher *t)
     scanf("%s",t->Name);
     printf("教师性别：");
     scanf("%s",gen);
-    if(gen == "男")
+    if(strcmp(gen,"男"))
         t->Gender = 0;
     else
         t->Gender = 1;
@@ -62,7 +63,7 @@ void inputTeacher(teacher *t)
     scanf("%lf",&t->PublicFee);
     printf("-----输入完毕-----\n\n");
     
-    salaryBeforeFee(t);
+    salaryBeforeFee(t); // 输入完毕后立即计算并传递
     totalFee(t);
     salaryAfterFee(t);
     printf("-----合计-----\n");
