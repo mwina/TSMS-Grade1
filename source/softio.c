@@ -17,7 +17,6 @@ void outputTeacher(const teacher *t)
         ,t->TelephoneFee,t->WaterElectricityFee,t->HouseFee,t->GainTax,t->HealthFee,t->PublicFee);
     printf("-----合计-----\n");
     printf("应发工资：%.5lf\n合计扣款：%.5lf\n实发工资：%.5lf\n",t->SalaryBeforeFee,t->TotalFee,t->SalaryAfterFee);
-    system("pause");
 }
 
 void inputTeacher(teacher *t)

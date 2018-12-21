@@ -4,6 +4,10 @@
 void checkFileProi();
 sqlite3* connectDB();
 int isTableExistCallback(void *,int nCount,char **cValue,char **cName);
+void addTeacherToDB(sqlite3 *teacherdb,const teacher *t);
+void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id);
+void findTeacherinDB_TeacherName(sqlite3 *teacherdb,const char *name);
+void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,int phone);
 
 void checkFileProi() // 用于检查数据库文件状态
 {
@@ -98,27 +102,65 @@ void addTeacherToDB(sqlite3 *teacherdb,const teacher *t)
 void findTeacherinDB_TeacherID(sqlite3 *teacherdb,int id)
 {
     char sql[300]="",*err;
-    sprintf(sql,"SELECT * FROM teacherdb WHERE TeacherID = %d",id);
-    int retc=sqlite3_exec(teacherdb,sql,outputTeacher,NULL,&err);
+    teacher t;
+    sprintf(sql,"SELECT * FROM teacherdb WHERE TeacherID=%d",id);
+    int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
     if(retc != SQLITE_OK)
         printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+    else
+        outputTeacher(&t);
     system("pause");
 }
 
-void findTeacherinDB_TeacherName(sqlite3 *teacherdb,char name)
+void findTeacherinDB_TeacherName(sqlite3 *teacherdb,const char *name)
 {
     char sql[300]="",*err;
-    int retc=sqlite3_exec(teacherdb,"SELECT * FROM teacherdb WHERE Name=",outputTeacher,NULL,&err);
+    teacher t;
+    sprintf(sql,"SELECT * FROM teacherdb WHERE Name=\'%s\'",name);
+    int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
     if(retc != SQLITE_OK)
         printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+    else
+        outputTeacher(&t);
     system("pause");
 }
 
 void findTeacherinDB_PhoneNumber(sqlite3 *teacherdb,int phone)
 {
     char sql[300]="",*err;
-    int retc=sqlite3_exec(teacherdb,"SELECT * FROM teacherdb WHERE PhoneNumber==phone",outputTeacher,NULL,&err);
+    teacher t;
+    sprintf(sql,"SELECT * FROM teacherdb WHERE PhoneNumber=%d",phone);
+    int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
     if(retc != SQLITE_OK)
         printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+    else
+        outputTeacher(&t);
     system("pause");
+}
+
+int findTeacherCallback(void *ret,int nCount,char **cValue,char **cName)
+{
+    if()
+    teacher *retdata=(teacher*)ret;
+
+    retdata->TeacherID=atoi(cValue[0]);
+    strcpy(retdata->Name,cValue[1]);
+    retdata->Gender=atoi(cValue[2]);
+    strcpy(retdata->OfficeAddr,cValue[3]);
+    strcpy(retdata->HomeAddr,cValue[4]);
+    retdata->PhoneNumber=atoi(cValue[5]);
+    retdata->BasicSalary=atof(cValue[6]);
+    retdata->Adds=atof(cValue[7]);
+    retdata->AddsLife=atof(cValue[8]);
+    retdata->TelephoneFee=atof(cValue[9]);
+    retdata->WaterElectricityFee=atof(cValue[10]);
+    retdata->HouseFee=atof(cValue[11]);
+    retdata->GainTax=atof(cValue[12]);
+    retdata->HealthFee=atof(cValue[13]);
+    retdata->PublicFee=atof(cValue[14]);
+    retdata->SalaryBeforeFee=atof(cValue[15]);
+    retdata->TotalFee=atof(cValue[16]);
+    retdata->SalaryAfterFee=atof(cValue[17]);
+
+    return SQLITE_OK;
 }
