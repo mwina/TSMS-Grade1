@@ -9,7 +9,6 @@
 #include <io.h>         // C扩展输入输出
 #include <windows.h>    // C窗口
 #include "sqlite3.h"
-#include "utf8_gbk_mem.h"
 
 // 定义 teacher 结构体
 typedef struct Teacher

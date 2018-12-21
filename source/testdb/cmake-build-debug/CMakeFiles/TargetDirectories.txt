@@ -1,3 +1,0 @@
-D:/TSMS-Grade1/source/testdb/cmake-build-debug/CMakeFiles/testdb.dir
-D:/TSMS-Grade1/source/testdb/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/TSMS-Grade1/source/testdb/cmake-build-debug/CMakeFiles/rebuild_cache.dir

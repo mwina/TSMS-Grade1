@@ -11,28 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="984bd9e4-4cdc-476b-a485-facd24e2aadd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testdb/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dboperation.c" beforeDir="false" afterPath="$PROJECT_DIR$/dboperation.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dboperation.h" beforeDir="false" afterPath="$PROJECT_DIR$/dboperation.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includeheaders.h" beforeDir="false" afterPath="$PROJECT_DIR$/includeheaders.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/softio.c" beforeDir="false" afterPath="$PROJECT_DIR$/softio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/main.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/cmake-build-debug/CMakeFiles/testdb.dir/objects.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/cmake-build-debug/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/cmake-build-debug/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/cmake-build-debug/testdb.exe" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/cmake-build-debug/testdb.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdb/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/testdb/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sqlite3exe/cmd.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../sqlite3exe/cmd.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sqlite3exe/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/../sqlite3exe/data.db" afterDir="false" />
-    </list>
+    <list default="true" id="984bd9e4-4cdc-476b-a485-facd24e2aadd" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,10 +71,10 @@
     <session id="-1700459557">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.0" value="2" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.4" value="2" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -175,6 +154,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -186,7 +166,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -237,16 +216,18 @@
       <workItem from="1545390337277" duration="195000" />
       <workItem from="1545393392673" duration="580000" />
       <workItem from="1545396529389" duration="1507000" />
+      <workItem from="1545398154268" duration="5000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3041000" />
+    <option name="totallyTimeSpent" value="3046000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16577825" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1673774" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -323,9 +304,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding>
-            <element signature="e#77#112#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
