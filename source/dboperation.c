@@ -168,3 +168,237 @@ int findTeacherCallback(void *ret,int nCount,char **cValue,char **cName) // 查�
 
     return SQLITE_OK;
 }
+
+void updataTeacherinDB(sqlite3 *teacherdb,int id)
+{
+    char sql[300]="",*err;
+    int choice=0;
+    int newID=id;
+    char gen;
+    int newgender;
+    char nameAndAddr;
+    double fee;
+    teacher t;
+    sprintf(sql,"SELECT * FROM teacherdata WHERE TeacherID=%d",id); // 构造select语句
+    int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
+    if(retc != SQLITE_OK)
+    {
+        printf("查询教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+    }
+    else
+    {
+        outputTeacher(&t);
+        while(choice<=15&&choice>=0)
+        {
+            printf("请选择需要修改的项目：");
+            printvariables();
+            printf("【0】.退出修改\n");
+            scanf("%d",&choice);
+            switch(choice)
+            {
+                case(0):
+                    printf("退出中\n");
+                    Sleep(2000);
+                    choice=16;
+                    break;
+                case(1):
+                    printf("请输入：");
+                    scanf("%d",&newID);
+                    sprinf(sql,"UPDATE teacherdata SET TeacherID = %d WHERE TeacherID = %d",newID,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(2):
+                    printf("请输入：");
+                    scanf("%s",&nameAndAddr);
+                    sprinf(sql,"UPDATE teacherdata SET Name = \'%s\' WHERE TeacherID = %d",nameAndAddr,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(3):
+                    printf("请输入：");
+                    scanf("%s",&gen);
+                    if(strcmp(gen,"男"))
+                        newgender = 0;
+                    else
+                        newgender = 1;
+                    sprinf(sql,"UPDATE teacherdata SET Gender = %d WHERE TeacherID = %d",newgender,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(4):
+                    printf("请输入：");
+                    scanf("%s",&nameAndAddr);
+                    sprinf(sql,"UPDATE teacherdata SET OfficeAddr = \'%s\' WHERE TeacherID = %d",nameAndAddr,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(5):
+                    printf("请输入：");
+                    scanf("%s",&nameAndAddr);
+                    sprinf(sql,"UPDATE teacherdata SET HomeAddr = \'%s\' WHERE TeacherID = %d",nameAndAddr,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(6):
+                    printf("请输入：");
+                    scanf("%s",&nameAndAddr);
+                    sprinf(sql,"UPDATE teacherdata SET PhoneNumber = \'%s\' WHERE TeacherID = %d",nameAndAddr,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(7):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET BasicSalary = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(8):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET Adds = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(9):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET AddsLife = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(10):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET TelephoneFee = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(11):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET WaterElectricityFee = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(12):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET HouseFee = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(13):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET GainTax = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(14):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET HealthFee = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+                case(15):
+                    printf("请输入：");
+                    scanf("%lf",&fee);
+                    sprinf(sql,"UPDATE teacherdata SET PublicFee = %lf WHERE TeacherID = %d",fee,id);
+                    retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+                    if(retc != SQLITE_OK)
+                    {
+                        printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+                    }
+                    break;
+            }
+            id=newID;
+            salaryBeforeFee(&t);
+            totalFee(&t);
+            salaryAfterFee(&t);
+            fee=t.SalaryBeforeFee;
+            sprinf(sql,"UPDATE teacherdata SET SalaryBeforeFee = %lf WHERE TeacherID = %d",fee,id);
+            retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+            if(retc != SQLITE_OK)
+            {
+                printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+            }
+            fee=t.TotalFee;
+            sprinf(sql,"UPDATE teacherdata SET TotalFee = %lf WHERE TeacherID = %d",fee,id);
+            retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+            if(retc != SQLITE_OK)
+            {
+                printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+            }
+            fee=t.SalaryAfterFee;
+            sprinf(sql,"UPDATE teacherdata SET SalaryAfterFee = %lf WHERE TeacherID = %d",fee,id);
+            retc=sqlite3_exec(teacherdb,sql,0,0,&err);
+            if(retc != SQLITE_OK)
+            {
+                printf("修改教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+            }        
+        }
+    }
+}
+
+
+
+void deleteTeacherinDB(sqlite3 *teacherdb,int id)
+{
+    char sql[300]="",*err;
+    teacher t;
+    sprinf(sql,"SELECT * FROM teacherdata WHERE TeacherID=%d",id);
+    int retc=sqlite3_exec(teacherdb,sql,findTeacherCallback,&t,&err);
+    if(retc != SQLITE_OK)
+    {
+        printf("删除教师数据失败。错误码：%d，错误信息：%s\n",retc,err);
+        printf("请先查询教师信息是否存在。\n");
+    }  
+    else
+        printf("删除教师数据成功。\n");
+    system("pause");    
+}

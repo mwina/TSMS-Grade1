@@ -33,6 +33,25 @@ typedef struct Teacher
     double SalaryAfterFee;
 } teacher;
 
+void printvariables()
+{
+    printf("【1】.教师编号\n");
+    printf("【2】.教师姓名\n");
+    printf("【3】.教师性别\n");
+    printf("【4】.单位名称\n");
+    printf("【5】.家庭住址\n");
+    printf("【6】.联系电话\n");
+    printf("【7】.基本工资\n");
+    printf("【8】.津贴\n");
+    printf("【9】.生活补贴\n");
+    printf("【10】.电话费\n");
+    printf("【11】.水电费\n");
+    printf("【12】.房租\n");
+    printf("【13】.所得税\n");
+    printf("【14】.卫生费\n");
+    printf("【15】.公积金\n");
+}
+
 // 分别是计算实发工资、应发工资和合计扣款的函数定义
 void salaryAfterFee(teacher *tmp);
 void salaryBeforeFee(teacher *tmp);
